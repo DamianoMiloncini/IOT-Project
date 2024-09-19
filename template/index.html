@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="mystyle.css">
+    <link rel="script" href="script.js"/>
+    <title>IoT Dashboard</title>
+</head>
+<body>
+    <h1>IoT Dashboard</h1>
+    <p>LED Status: <span id="ledStatus" class="led off"></span></p>
+    <button onclick="toggleLED()">Toggle LED</button>
+
+    <script>
+        let ledState = 'off';
+
+        function updateLEDStatus() {
+            const ledElement = document.getElementById('ledStatus');
+            ledElement.className = `led ${ledState}`;
+        }
+
+        function toggleLED() {
+            ledState = ledState === 'off' ? 'on' : 'off';
+            fetch('/led_control', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ led: ledState }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('LED State:', data.state);
+                updateLEDStatus();
+            });
+        }
+
+        updateLEDStatus();
+    </script>
+</body>
+</html>
