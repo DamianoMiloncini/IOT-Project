@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="mystyle.css">
-    <link rel="script" href="script.js"/>
     <title>IoT Dashboard</title>
 </head>
 <body>
@@ -21,19 +20,19 @@
         }
 
         function toggleLED() {
-            ledState = ledState === 'off' ? 'on' : 'off';
-            fetch('/led_control', {
+            const newState = ledState === 'off' ? 'on' : 'off';
+            const url = newState === 'on' ? '/turn_on' : '/turn_off';
+
+            fetch(url, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ led: ledState }),
             })
-            .then(response => response.json())
+            .then(response => response.text())
             .then(data => {
-                console.log('LED State:', data.state);
+                console.log('LED State:', data);
+                ledState = data.toLowerCase();
                 updateLEDStatus();
-            });
+            })
+            .catch(error => console.error('Error:', error));
         }
 
         updateLEDStatus();
