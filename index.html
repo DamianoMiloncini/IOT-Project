@@ -27,6 +27,13 @@
         </div>
 
     </div>
+    <link rel="stylesheet" href="mystyle.css">
+    <title>IoT Dashboard</title>
+</head>
+<body>
+    <h1>IoT Dashboard</h1>
+    <p>LED Status: <span id="ledStatus" class="led off"></span></p>
+    <button onclick="toggleLED()">Toggle LED</button>
 
     <script>
         let ledState = 'off';
