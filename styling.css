@@ -5,22 +5,50 @@ body {
 }
 
 h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
+    font-weight: 100;
     margin-bottom: 20px;
 }
 
-.led {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: inline-block;
-    margin-bottom: 20px;
+
+#container {
+    width: 65%; /* Set a fixed or flexible width */
+    height: 800px;
+    margin: 0 auto; /* Center horizontally */
+    padding: 20px; /* Optional padding inside the div */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+
+    /* Ombre background from #0D2B5D to a darker shade */
+    background: linear-gradient(135deg, #0D2B5D 0%, #071a3f 100%);
+    text-align: center; /* Center text inside */
 }
 
-.led.on {
-    background-color: green;
+#dashboard {
+    width: 25%; /* Set a fixed or flexible width */
+    margin: 0 auto; /* Center horizontally */
+    padding: 20px; /* Optional padding inside the div */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    
+    background-color: #ffffff0e; /* Optional background color with transparency */
+    text-align: center; /* Center text inside */
+
+    /* Add a white border */
+    border: 3px solid; /* 2px white border */
+    border-color: rgba(255, 255, 255, 0.078);
 }
 
-.led.off {
-    background-color: red;
+
+#dashboard table {
+    width: 100%; /* Make table take the full width of the div */
 }
+
+#dashboard #lightImage {
+    width: 200px; /* Adjust the image size */
+}
+
+#dashboard #switchImage {
+    border-radius: 10px; /* Rounded corners */
+}
+

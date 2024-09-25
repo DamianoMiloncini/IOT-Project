@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styling.css">
+    <title>IoT Dashboard</title>
+</head>
+<body>
+    
+    <div id="container">
+        <h1 style="color:white">IoT Dashboard</h1>
+        <!-- <h3>Damiano Miloncini, Michaella Nsumanyi, Ayush Patel</h3> -->
+        <!-- <p>LED Status: <span id="ledStatus" class="led off"></span></p> -->
+
+        <div id="dashboard">
+            <table>
+                <tr>
+                    <td>
+                        <img src="assets/switch_off.png" id="switchImage" onclick="toggleLED()">
+                    </td>
+                    <td>
+                        <img src="assets/light_off.png" id="lightImage">
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+    <script>
+        let ledState = 'off';
+
+        function updateLEDStatus() {
+            const ledElement = document.getElementById('ledStatus');
+            ledElement.className = `led ${ledState}`;
+            ledElement.textContent = ledState === 'on' ? 'ON' : 'OFF'; // Update text content
+            
+            // Update switch and light images based on the LED state
+            const switchImage = document.getElementById('switchImage');
+            const lightImage = document.getElementById('lightImage');
+
+            if (ledState === 'on') {
+                switchImage.src = 'assets/switch_on.png';
+                lightImage.src = 'assets/light_on.png';
+            } else {
+                switchImage.src = 'assets/switch_off.png';
+                lightImage.src = 'assets/light_off.png';
+            }
+        }
+
+        function toggleLED() {
+            const newState = ledState === 'off' ? 'on' : 'off';
+            const url = newState === 'on' ? '/turn_on' : '/turn_off';
+            console.log(url);
+            fetch(url, {
+                method: 'POST',
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log('LED State:', data);
+                ledState = data.toLowerCase();
+                updateLEDStatus(); // Update the LED status and images
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        updateLEDStatus();
+    </script>
+</body>
+</html>

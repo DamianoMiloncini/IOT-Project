@@ -10,7 +10,6 @@ GPIO.setup(LED_PIN, GPIO.OUT)
 
 @app.route('/')
 def index():
-    # Load the web interface
     return send_from_directory('.', 'index.html')
 
 @app.route('/turn_on', methods=['POST'])
