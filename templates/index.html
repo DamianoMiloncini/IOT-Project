@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styling.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styling.css') }}">
     <title>IoT Dashboard</title>
 </head>
 <body>
@@ -17,23 +17,16 @@
             <table>
                 <tr>
                     <td>
-                        <img src="assets/switch_off.png" id="switchImage" onclick="toggleLED()">
+                        <img src="{{ url_for('static', filename='images/switch_off.png') }}" id="switchImage" onclick="toggleLED()">
                     </td>
                     <td>
-                        <img src="assets/light_off.png" id="lightImage">
+                        <img src="{{ url_for('static', filename='images/light_off.png') }}" id="lightImage">
                     </td>
                 </tr>
             </table>
         </div>
 
     </div>
-    <link rel="stylesheet" href="mystyle.css">
-    <title>IoT Dashboard</title>
-</head>
-<body>
-    <h1>IoT Dashboard</h1>
-    <p>LED Status: <span id="ledStatus" class="led off"></span></p>
-    <button onclick="toggleLED()">Toggle LED</button>
 
     <script>
         let ledState = 'off';
@@ -60,7 +53,7 @@
             const newState = ledState === 'off' ? 'on' : 'off';
             const url = newState === 'on' ? '/turn_on' : '/turn_off';
             console.log(url);
-            fetch(url, {
+            fetch(url, { 
                 method: 'POST',
             })
             .then(response => response.text())

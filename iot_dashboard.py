@@ -1,5 +1,5 @@
 import RPi.GPIO as GPIO
-from flask import Flask, send_from_directory, request
+from flask import Flask, send_from_directory, request, render_template
 
 app = Flask(__name__)
 
@@ -10,7 +10,7 @@ GPIO.setup(LED_PIN, GPIO.OUT)
 
 @app.route('/')
 def index():
-    return send_from_directory('.', 'index.html')
+    return render_template('index.html');
 
 @app.route('/turn_on', methods=['POST'])
 def turn_on():
